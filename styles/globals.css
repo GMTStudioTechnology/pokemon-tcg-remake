@@ -1,0 +1,82 @@
+/* Card Animations */
+.card-container {
+    perspective: 1000px;
+}
+
+.card-flipper {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.unrevealed .card-flipper {
+    transform: rotateY(180deg);
+}
+
+.revealed .card-flipper {
+    transform: rotateY(0deg);
+}
+
+.card-front, .card-back {
+    backface-visibility: hidden;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* Rarity Animations */
+@keyframes rainbow-shine {
+    0% { border-color: #ff0000; }
+    17% { border-color: #ff00ff; }
+    33% { border-color: #0000ff; }
+    50% { border-color: #00ffff; }
+    67% { border-color: #00ff00; }
+    83% { border-color: #ffff00; }
+    100% { border-color: #ff0000; }
+}
+
+@keyframes gold-shine {
+    0% { box-shadow: 0 0 5px gold; }
+    50% { box-shadow: 0 0 30px gold; }
+    100% { box-shadow: 0 0 5px gold; }
+}
+
+@keyframes shine-overlay {
+    0% { background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.1) 55%, transparent 100%); background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.animate-rainbow-shine {
+    animation: rainbow-shine 3s linear infinite;
+}
+
+.animate-gold-shine {
+    animation: gold-shine 2s infinite;
+}
+
+.animate-shine-overlay {
+    animation: shine-overlay 2s linear infinite;
+    background-size: 200% 100%;
+} 
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.card-flipper {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.card-front {
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+
+.card-back {
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
