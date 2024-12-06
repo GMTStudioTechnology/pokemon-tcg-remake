@@ -9,6 +9,7 @@ const OpenPackUI = () => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [revealedCards, setRevealedCards] = useState([]);
     const packOpener = OpenPack();
+    const [selectedCard, setSelectedCard] = useState(null);
     
     const [playPackOpen, { stop: stopPackOpen }] = useSound(pack_open);
 
@@ -36,6 +37,14 @@ const OpenPackUI = () => {
         }
         
         setIsAnimating(false);
+    };
+
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+    };
+
+    const closeModal = () => {
+        setSelectedCard(null);
     };
 
     return (
@@ -75,8 +84,9 @@ const OpenPackUI = () => {
                         {cards.map((card, index) => (
                             <div 
                                 key={index} 
+                                onClick={() => handleCardClick(card)}
                                 className={`
-                                    card-container
+                                    card-container cursor-pointer
                                     ${revealedCards.includes(index) ? 'revealed animate-card-reveal' : 'unrevealed'}
                                     transform transition-all duration-500 ease-in-out
                                     ${getRarityClass(card?.rarity || 1)}
@@ -114,6 +124,96 @@ const OpenPackUI = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Card Modal */}
+            {selectedCard && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" onClick={closeModal}>
+                    <div className="relative max-w-4xl w-full bg-[#1C1C1E] rounded-2xl shadow-xl" onClick={e => e.stopPropagation()}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+                            {/* Card Image */}
+                            <div className="relative aspect-[2.5/3.5] rounded-xl overflow-hidden">
+                                <img 
+                                    src={selectedCard.image} 
+                                    alt={selectedCard.name}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+                            </div>
+
+                            {/* Card Details */}
+                            <div className="text-white space-y-4">
+                                <div className="flex justify-between items-start">
+                                    <h2 className="text-2xl font-bold">{selectedCard.name}</h2>
+                                    <button 
+                                        onClick={closeModal}
+                                        className="text-white/60 hover:text-white"
+                                    >
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <p className="text-white/80">HP: {selectedCard.hp}</p>
+                                    <p className="text-white/80">Stage: {selectedCard.stage || 'Basic'}</p>
+                                    <p className="text-white/80">Rarity: {getRarityText(selectedCard.rarity)}</p>
+                                    <p className="text-white/80">Weakness: {selectedCard.weakness}</p>
+                                    
+                                    {/* Retreat Cost */}
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-white/80">Retreat Cost:</span>
+                                        {selectedCard.retreatCost.map((cost, index) => (
+                                            <span key={index} className="px-2 py-1 bg-white/10 rounded">
+                                                {cost.amount} {cost.type}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    {/* Attacks */}
+                                    <div className="space-y-3">
+                                        <h3 className="text-lg font-semibold">Attacks</h3>
+                                        {selectedCard.attacks.map((attack, index) => (
+                                            <div key={index} className="bg-white/5 rounded-lg p-4">
+                                                <div className="flex justify-between items-center">
+                                                    <h4 className="font-medium">{attack.name}</h4>
+                                                    <span>{attack.score} damage</span>
+                                                </div>
+                                                
+                                                {/* Energy Cost */}
+                                                <div className="flex gap-2 mt-2">
+                                                    {attack.energy.map((energy, idx) => (
+                                                        <span key={idx} className="px-2 py-1 bg-white/10 rounded">
+                                                            {energy.amount} {energy.type}
+                                                        </span>
+                                                    ))}
+                                                </div>
+
+                                                {/* Effect */}
+                                                {attack.effect && (
+                                                    <p className="mt-2 text-sm text-white/70">
+                                                        Effect: {attack.effect.description || 
+                                                                `${attack.effect.type} - ${attack.effect.amount}`}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Ability (if exists) */}
+                                    {selectedCard.ability && (
+                                        <div className="bg-white/5 rounded-lg p-4">
+                                            <h3 className="font-semibold">{selectedCard.ability.name}</h3>
+                                            <p className="text-sm text-white/70 mt-1">
+                                                {selectedCard.ability.description}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
