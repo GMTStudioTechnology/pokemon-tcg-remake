@@ -1784,7 +1784,220 @@ const PokemonList = {
             rarity: 2
         },
 
-        
+
+        {
+            number: 72,
+            name: "Goldeen", 
+            image: "../../images/A1_072_EN.jpeg",
+            attacks: [
+                {
+                    name: "Flop",
+                    score: 10,
+                    energy: [
+                        { type: "any", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+
+        {
+            number: 73,
+            name: "Seaking", 
+            image: "../../images/A1_073_EN.jpeg",
+            attacks: [
+                {
+                    name: "Horn Hazard",
+                    score: 80,
+                    energy: [
+                        { type: "water", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 100,
+            stage: "stage 1",
+            rarity: 1
+        },
+
+        {
+            number: 74,
+            name: "Staryu", 
+            image: "../../images/A1_074_EN.jpeg",
+            attacks: [
+                {
+                    name: "Smack",
+                    score: 20,
+                    energy: [
+                        { type: "any", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 50,
+            stage: "basic",
+            rarity: 1
+        },
+
+        {
+            number: 75,
+            name: "Starmie", 
+            image: "../../images/A1_075_EN.jpeg",
+            attacks: [
+                {
+                    name: "Wave Splash",
+                    score: 40,
+                    energy: [
+                        { type: "water", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 0 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2
+        },
+
+        {
+            number: 76,
+            name: "Starmie EX", 
+            image: "../../images/A1_076_EN.jpeg",
+            attacks: [
+                {
+                    name: "Hydro Splash",
+                    score: 90,
+                    energy: [
+                        { type: "water", amount: 2 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 0 }
+            ],
+            hp: 130,
+            stage: "stage 1",
+            rarity: 4
+        },
+
+
+        {
+            number: 77,
+            name: "Magikarp", 
+            image: "../../images/A1_077_EN.jpeg",
+            attacks: [
+                {
+                    name: "Splash",
+                    score: 10,
+                    energy: [
+                        { type: "any", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 30,
+            stage: "basic",
+            rarity: 1
+        },
+
+        {
+            number: 78,
+            name: "Gyarados", 
+            image: "../../images/A1_078_EN.jpeg",
+            attacks: [
+                {
+                    name: "Hyper Beam",
+                    score: 100,
+                    energy: [
+                        { type: "water", amount: 4 },
+                    ],
+                    effect: {
+                        type: "discard_energy",
+                        target: "opponent_active",
+                        amount: 1,
+                        description: "Discard a random Energy from your opponent's Active Pokémon"
+                    }
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 3 }
+            ],
+            hp: 150,
+            stage: "stage 1",
+            rarity: 3
+        },
+
+
+        {
+            number: 79,
+            name: "Lapras", 
+            image: "../../images/A1_079_EN.jpeg",
+            attacks: [
+                {
+                    name: "Hydro Pump",
+                    score: 20,
+                    energy: [
+                        { type: "water", amount: 1 },
+                    ],
+                    effect: {
+                        type: "extra_damage",
+                        condition: "extra_water_energy",
+                        amount: 70,
+                        description: "If this Pokémon has at least 3 extra Water Energy attached, this attack does 70 more damage"
+                    }
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 100,
+            stage: "basic",
+            rarity: 3
+        },
+
+        {
+            number: 80,
+            name: "Vaporeon", 
+            image: "../../images/A1_080_EN.jpeg",
+            attacks: [
+                {
+                    name: "Bubble Drain",
+                    score: 60,
+                    energy: [
+                        { type: "water", amount: 1 },
+                        { type: "any", amount: 2 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 130,
+            stage: "stage 1",
+            rarity: 3
+        },
+
     ]
 
 
