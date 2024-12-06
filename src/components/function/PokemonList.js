@@ -2410,6 +2410,55 @@ const PokemonList = {
             stage: "basic",
             rarity: 4
         },
+
+        {
+            number: 97,
+            name: "Magnemite",
+            image: "../../images/A1_097_EN.jpeg",
+            attacks: [
+                {
+                    name: "Lighting Ball",
+                    score: 20,
+                    energy: [
+                        { type: "electric", amount: 1 },
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity:1
+        },
+
+        {
+            number: 98,
+            name: "Magneton",
+            image: "../../images/A1_098_EN.jpeg",
+            attacks: [
+                {
+                    name: "Spinning Attack",
+                    score: 60,
+                    energy: [
+                        { type: "electric", amount: 2 },
+                        { type: "any", amount: 2 }
+                    ]
+                }
+            ],
+            ability: {
+                name: "Volt Charge",
+                description: "Once during your turn, you may take a Lightning Energy from your Energy Zone and attach it to this Pokémon."
+            },
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 3
+        },
     ]
 
 
