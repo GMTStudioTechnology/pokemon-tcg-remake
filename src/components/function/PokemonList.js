@@ -1998,6 +1998,343 @@ const PokemonList = {
             rarity: 3
         },
 
+        {
+            number: 81,
+            name: "Omanyte", 
+            image: "../../images/A1_081_EN.jpeg",
+            attacks: [
+                {
+                    name: "Water Gun",
+                    score: 40,
+                    energy: [
+                        { type: "water", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2
+        },
+
+
+        {
+            number: 82,
+            name: "Omastar", 
+            image: "../../images/A1_082_EN.jpeg",
+            attacks: [
+                {
+                    name: "Ancient Whirlpool",
+                    score: 70,
+                    energy: [
+                        { type: "water", amount: 1 },
+                        { type: "any", amount: 2 },
+                    ],
+                    effect: {
+                        type: "prevent_attack",
+                        target: "opponent_active",
+                        duration: "next_turn",
+                        description: "During your opponent's next turn, the Defending Pokemon can't attack."
+                    }
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 140,
+            stage: "stage 2",
+            rarity: 3
+        },
+        {
+            number: 83,
+            name: "Articuno", 
+            image: "../../images/A1_083_EN.jpeg",
+            attacks: [
+                {
+                    name: "Ice Beam",
+                    score: 60,
+                    energy: [
+                        { type: "water", amount: 2 },
+                        { type: "any", amount: 1 }
+                    ],
+                    effect: {
+                        type: "coinFlip",
+                        result: "heads",
+                        action: {
+                            type: "status",
+                            condition: "paralyzed",
+                            target: "opponent_active"
+                        }
+                    }
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 100,
+            stage: "basic",
+            rarity: 3
+        },
+
+
+        {
+            number: 84,
+            name: "Articuno EX", 
+            image: "../../images/A1_084_EN.jpeg",
+            attacks: [
+                {
+                    name: "Ice Wing",
+                    score: 40,
+                    energy: [
+                        { type: "water", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ]
+                },
+                {
+                    name: "Blizzard",
+                    score: 80,
+                    energy: [
+                        { type: "water", amount: 3 }
+                    ],
+                    effect: {
+                        type: "spread_damage",
+                        target: "opponent_bench",
+                        amount: 10,
+                        description: "This attack also does 10 damage to each of your opponent's Benched Pokémon"
+                    }
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 140,
+            stage: "basic",
+            rarity: 4
+        },
+
+        {
+            number: 85,
+            name: "Ducklett", 
+            image: "../../images/A1_085_EN.jpeg",
+            attacks: [
+                {
+                    name: "Flap",
+                    score: 30,
+                    energy: [
+                        { type: "any", amount: 2 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 50,
+            stage: "basic",
+            rarity: 1
+        },
+
+        {
+            number: 86,
+            name: "Swanna", 
+            image: "../../images/A1_086_EN.jpeg",
+            attacks: [
+                {
+                    name: "Wing Attack",
+                    score: 70,
+                    energy: [
+                        { type: "any", amount: 3 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2
+        },
+
+
+        {
+            number: 87,
+            name: "Froakie", 
+            image: "../../images/A1_087_EN.jpeg",
+            attacks: [
+                {
+                    name: "flop",
+                    score: 10,
+                    energy: [
+                        { type: "any", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+
+
+        {
+            number: 88,
+            name: "Frogadier", 
+            image: "../../images/A1_088_EN.jpeg",
+            attacks: [
+                {
+                    name: "Water Drip",
+                    score: 30,
+                    energy: [
+                        { type: "any", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 2
+        },
+
+        {
+            number: 89,
+            name: "Greninja", 
+            image: "../../images/A1_089_EN.jpeg",
+            attacks: [
+                {
+                    name: "Mist Slash",
+                    score: 60,
+                    energy: [
+                        { type: "water", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ],
+                }
+            ],
+            ability: {
+                name: "Water Shuriken",
+                description: "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon."
+            },
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 0 }
+            ],
+            hp: 120,
+            stage: "stage 2",
+            rarity: 3
+        },
+
+
+        {
+            number: 90,
+            name: "Pyukumuku", 
+            image: "../../images/A1_090_EN.jpeg",
+            attacks: [
+                {
+                    name: "Rain Splash",
+                    score: 30,
+                    energy: [
+                        { type: "water", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount:1 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 91,
+            name: "Bruxish", 
+            image: "../../images/A1_091_EN.jpeg",
+            attacks: [
+                {
+                    name: "Second Strike",
+                    score: 10,
+                    energy: [
+                        { type: "water", amount: 2 },
+                    ],
+                    effect: {
+                        type: "conditional_damage",
+                        condition: "opponent_damaged",
+                        extraDamage: 60,
+                        description: "If your opponent's Active Pokémon has damage on it, this attack does 60 more damage"
+                    }
+                }
+            ],
+            weakness: "electric",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "basic",
+            rarity: 2
+        },
+
+        {
+            number: 92,
+            name: "Snom", 
+            image: "../../images/A1_092_EN.jpeg",
+            attacks: [
+                {
+                    name: "Ram",
+                    score: 10,
+                    energy: [
+                        { type: "any", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "steel",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 50,
+            stage: "basic",
+            rarity: 1
+        },
+
+
+        {
+            number: 93,
+            name: "Frosmoth", 
+            image: "../../images/A1_093_EN.jpeg",
+            attacks: [
+                {
+                    name: "Powder Snow",
+                    score: 40,
+                    energy: [
+                        { type: "water", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ],
+                    effect: {
+                        type: "status",
+                        condition: "asleep",
+                        target: "opponent_active"
+                    }
+                }
+            ],
+            weakness: "steel",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2
+        },
     ]
 
 
