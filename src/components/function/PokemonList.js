@@ -2335,8 +2335,82 @@ const PokemonList = {
             stage: "stage 1",
             rarity: 2
         },
-    ]
+    ],
 
+    electric: [
+        
+        {
+            number: 94,
+            name: "Pikachu",
+            image: "../../images/A1_094_EN.jpeg",
+            attacks: [
+                {
+                    name: "Gnaw",
+                    score: 20,
+                    energy: [
+                        { type: "electric", amount: 1 },
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity:1
+
+        },
+
+        {
+            number: 95,
+            name: "Raichu",
+            image: "../../images/A1_095_EN.jpeg",
+            attacks: [
+                {
+                    name: "Thunderbolt",
+                    score: 140,
+                    energy: [
+                        { type: "electric", amount: 3 },
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 100,
+            stage: "basic",
+            rarity:3
+
+        },
+
+        {
+            number: 96,
+            name: "Pikachu EX",
+            image: "../../images/A1_096_EN.jpeg",
+            attacks: [
+                {
+                    name: "Circle Circuit",
+                    score: 30,
+                    energy: [
+                        { type: "electric", amount: 2 },
+                    ],
+                    effect: {
+                        type: "multiply_bench",
+                        description: "This attack does 30 damage for each of your Benched Pokémon"
+                    }
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 120,
+            stage: "basic",
+            rarity: 4
+        },
+    ]
 
 
         
