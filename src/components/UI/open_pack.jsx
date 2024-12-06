@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import OpenPack from '../function/Open_pack';
 import useSound from 'use-sound';
 import pack_open from "../../audio/5.mp3";
+import { motion, AnimatePresence } from 'framer-motion';
 
 const OpenPackUI = () => {
     const [cards, setCards] = useState([]);
@@ -10,13 +11,22 @@ const OpenPackUI = () => {
     const [revealedCards, setRevealedCards] = useState([]);
     const packOpener = OpenPack();
     const [selectedCard, setSelectedCard] = useState(null);
+    const [packShake, setPackShake] = useState(false);
     
     const [playPackOpen, { stop: stopPackOpen }] = useSound(pack_open);
+
+    const handlePackHover = () => {
+        if (!isAnimating) {
+            setPackShake(true);
+            setTimeout(() => setPackShake(false), 800);
+        }
+    };
 
     const handleOpenPack = async () => {
         setIsAnimating(true);
         stopPackOpen();
         playPackOpen();
+        
         const newCards = packOpener.openNewPack();
         
         if (!newCards || !Array.isArray(newCards) || newCards.length === 0) {
@@ -28,11 +38,12 @@ const OpenPackUI = () => {
         setRevealedCards([]);
         setCards(newCards);
         
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 1500));
         setIsOpen(true);
         
         for (let i = 0; i < newCards.length; i++) {
-            await new Promise(resolve => setTimeout(resolve, 500));
+            const delay = newCards[i].rarity >= 4 ? 1000 : 500;
+            await new Promise(resolve => setTimeout(resolve, delay));
             setRevealedCards(prev => [...prev, i]);
         }
         
@@ -49,9 +60,14 @@ const OpenPackUI = () => {
 
     return (
         <div className="flex flex-col items-center min-h-screen bg-[#1C1C1E] p-8">
-            <button 
+            <motion.button 
                 onClick={handleOpenPack}
+                onMouseEnter={handlePackHover}
                 disabled={isAnimating}
+                animate={packShake ? {
+                    rotate: [0, -2, 2, -2, 0],
+                    scale: [1, 1.02, 1]
+                } : {}}
                 className={`
                     px-12 py-4 mb-12
                     text-xl font-medium text-white
@@ -59,7 +75,7 @@ const OpenPackUI = () => {
                     hover:bg-white/20
                     rounded-full shadow-lg
                     transform transition-all duration-300 ease-in-out
-                    ${isAnimating ? 'opacity-50' : 'hover:scale-102'}
+                    ${isAnimating ? 'animate-pulse' : 'hover:scale-102'}
                     disabled:cursor-not-allowed
                     backdrop-blur-xl
                     border border-white/10
@@ -76,147 +92,168 @@ const OpenPackUI = () => {
                         </div>
                     </div>
                 ) : 'Open Pack'}
-            </button>
+            </motion.button>
 
-            {isOpen && (
-                <div className="w-full max-w-8xl px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                        {cards.map((card, index) => (
-                            <div 
-                                key={index} 
-                                onClick={() => handleCardClick(card)}
-                                className={`
-                                    card-container cursor-pointer
-                                    ${revealedCards.includes(index) ? 'revealed animate-card-reveal' : 'unrevealed'}
-                                    transform transition-all duration-500 ease-in-out
-                                    ${getRarityClass(card?.rarity || 1)}
-                                    hover:scale-103
-                                    group
-                                `}
-                            >
-                                <div className="relative w-full pt-[140%] perspective-1000">
-                                    <div className="card-flipper">
-                                        <div className="card-back absolute top-0 left-0 w-full h-full">
-                                            <div className="absolute inset-0 bg-white/5 rounded-2xl backdrop-blur-xl"></div>
-                                            <img 
-                                                src="/images/card-back.png" 
-                                                alt="Card Back"
-                                                className="w-full h-full object-cover rounded-2xl"
-                                            />
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="w-full max-w-8xl px-4"
+                    >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                            {cards.map((card, index) => (
+                                <div 
+                                    key={index} 
+                                    onClick={() => handleCardClick(card)}
+                                    className={`
+                                        card-container cursor-pointer
+                                        ${revealedCards.includes(index) ? 'revealed animate-card-reveal' : 'unrevealed'}
+                                        transform transition-all duration-500 ease-in-out
+                                        ${getRarityClass(card?.rarity || 1)}
+                                        hover:scale-103
+                                        group
+                                    `}
+                                >
+                                    <div className="relative w-full pt-[140%] perspective-1000">
+                                        <div className="card-flipper">
+                                            <div className="card-back absolute top-0 left-0 w-full h-full">
+                                                <div className="absolute inset-0 bg-white/5 rounded-2xl backdrop-blur-xl"></div>
+                                                <img 
+                                                    src="/images/card-back.png" 
+                                                    alt="Card Back"
+                                                    className="w-full h-full object-cover rounded-2xl"
+                                                />
+                                            </div>
+                                            
+                                            <div className="card-front absolute top-0 left-0 w-full h-full">
+                                                <img 
+                                                    src={card?.image || '/images/default-card.png'} 
+                                                    alt={card?.name || 'Card'}
+                                                    className="w-full h-full object-cover rounded-2xl"
+                                                />
+                                                <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/30 backdrop-blur-md rounded-b-xl transition-all duration-300 group-hover:bg-black/40">
+                                                    <h3 className="text-lg font-medium text-white text-center">
+                                                        {card?.name || 'Unknown Card'}
+                                                    </h3>
+                                                    <p className="text-sm text-center text-white/80 mt-1">
+                                                        {getRarityText(card?.rarity || 1)}
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Enhanced Card Modal */}
+            <AnimatePresence>
+                {selectedCard && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80"
+                        onClick={closeModal}
+                    >
+                        <motion.div 
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative max-w-4xl w-full bg-[#1C1C1E] rounded-2xl shadow-xl"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+                                {/* Card Image */}
+                                <div className="relative aspect-[2.5/3.5] rounded-xl overflow-hidden">
+                                    <img 
+                                        src={selectedCard.image} 
+                                        alt={selectedCard.name}
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                    />
+                                </div>
+
+                                {/* Card Details */}
+                                <div className="text-white space-y-4">
+                                    <div className="flex justify-between items-start">
+                                        <h2 className="text-2xl font-bold">{selectedCard.name}</h2>
+                                        <button 
+                                            onClick={closeModal}
+                                            className="text-white/60 hover:text-white"
+                                        >
+                                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="text-white/80">HP: {selectedCard.hp}</p>
+                                        <p className="text-white/80">Stage: {selectedCard.stage || 'Basic'}</p>
+                                        <p className="text-white/80">Rarity: {getRarityText(selectedCard.rarity)}</p>
+                                        <p className="text-white/80">Weakness: {selectedCard.weakness}</p>
                                         
-                                        <div className="card-front absolute top-0 left-0 w-full h-full">
-                                            <img 
-                                                src={card?.image || '/images/default-card.png'} 
-                                                alt={card?.name || 'Card'}
-                                                className="w-full h-full object-cover rounded-2xl"
-                                            />
-                                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/30 backdrop-blur-md rounded-b-xl transition-all duration-300 group-hover:bg-black/40">
-                                                <h3 className="text-lg font-medium text-white text-center">
-                                                    {card?.name || 'Unknown Card'}
-                                                </h3>
-                                                <p className="text-sm text-center text-white/80 mt-1">
-                                                    {getRarityText(card?.rarity || 1)}
+                                        {/* Retreat Cost */}
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-white/80">Retreat Cost:</span>
+                                            {selectedCard.retreatCost.map((cost, index) => (
+                                                <span key={index} className="px-2 py-1 bg-white/10 rounded">
+                                                    {cost.amount} {cost.type}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        {/* Attacks */}
+                                        <div className="space-y-3">
+                                            <h3 className="text-lg font-semibold">Attacks</h3>
+                                            {selectedCard.attacks.map((attack, index) => (
+                                                <div key={index} className="bg-white/5 rounded-lg p-4">
+                                                    <div className="flex justify-between items-center">
+                                                        <h4 className="font-medium">{attack.name}</h4>
+                                                        <span>{attack.score} damage</span>
+                                                    </div>
+                                                    
+                                                    {/* Energy Cost */}
+                                                    <div className="flex gap-2 mt-2">
+                                                        {attack.energy.map((energy, idx) => (
+                                                            <span key={idx} className="px-2 py-1 bg-white/10 rounded">
+                                                                {energy.amount} {energy.type}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+
+                                                    {/* Effect */}
+                                                    {attack.effect && (
+                                                        <p className="mt-2 text-sm text-white/70">
+                                                            Effect: {attack.effect.description || 
+                                                                    `${attack.effect.type} - ${attack.effect.amount}`}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Ability (if exists) */}
+                                        {selectedCard.ability && (
+                                            <div className="bg-white/5 rounded-lg p-4">
+                                                <h3 className="font-semibold">{selectedCard.ability.name}</h3>
+                                                <p className="text-sm text-white/70 mt-1">
+                                                    {selectedCard.ability.description}
                                                 </p>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Card Modal */}
-            {selectedCard && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" onClick={closeModal}>
-                    <div className="relative max-w-4xl w-full bg-[#1C1C1E] rounded-2xl shadow-xl" onClick={e => e.stopPropagation()}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-                            {/* Card Image */}
-                            <div className="relative aspect-[2.5/3.5] rounded-xl overflow-hidden">
-                                <img 
-                                    src={selectedCard.image} 
-                                    alt={selectedCard.name}
-                                    className="absolute inset-0 w-full h-full object-cover"
-                                />
-                            </div>
-
-                            {/* Card Details */}
-                            <div className="text-white space-y-4">
-                                <div className="flex justify-between items-start">
-                                    <h2 className="text-2xl font-bold">{selectedCard.name}</h2>
-                                    <button 
-                                        onClick={closeModal}
-                                        className="text-white/60 hover:text-white"
-                                    >
-                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <p className="text-white/80">HP: {selectedCard.hp}</p>
-                                    <p className="text-white/80">Stage: {selectedCard.stage || 'Basic'}</p>
-                                    <p className="text-white/80">Rarity: {getRarityText(selectedCard.rarity)}</p>
-                                    <p className="text-white/80">Weakness: {selectedCard.weakness}</p>
-                                    
-                                    {/* Retreat Cost */}
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-white/80">Retreat Cost:</span>
-                                        {selectedCard.retreatCost.map((cost, index) => (
-                                            <span key={index} className="px-2 py-1 bg-white/10 rounded">
-                                                {cost.amount} {cost.type}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    {/* Attacks */}
-                                    <div className="space-y-3">
-                                        <h3 className="text-lg font-semibold">Attacks</h3>
-                                        {selectedCard.attacks.map((attack, index) => (
-                                            <div key={index} className="bg-white/5 rounded-lg p-4">
-                                                <div className="flex justify-between items-center">
-                                                    <h4 className="font-medium">{attack.name}</h4>
-                                                    <span>{attack.score} damage</span>
-                                                </div>
-                                                
-                                                {/* Energy Cost */}
-                                                <div className="flex gap-2 mt-2">
-                                                    {attack.energy.map((energy, idx) => (
-                                                        <span key={idx} className="px-2 py-1 bg-white/10 rounded">
-                                                            {energy.amount} {energy.type}
-                                                        </span>
-                                                    ))}
-                                                </div>
-
-                                                {/* Effect */}
-                                                {attack.effect && (
-                                                    <p className="mt-2 text-sm text-white/70">
-                                                        Effect: {attack.effect.description || 
-                                                                `${attack.effect.type} - ${attack.effect.amount}`}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Ability (if exists) */}
-                                    {selectedCard.ability && (
-                                        <div className="bg-white/5 rounded-lg p-4">
-                                            <h3 className="font-semibold">{selectedCard.ability.name}</h3>
-                                            <p className="text-sm text-white/70 mt-1">
-                                                {selectedCard.ability.description}
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
