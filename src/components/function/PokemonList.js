@@ -2335,10 +2335,7 @@ const PokemonList = {
             stage: "stage 1",
             rarity: 2
         },
-    ],
 
-    electric: [
-        
         {
             number: 94,
             name: "Pikachu",
@@ -2458,6 +2455,341 @@ const PokemonList = {
             hp: 80,
             stage: "stage 1",
             rarity: 3
+        },
+
+        {
+            number: 99,
+            name: "Voltorb",
+            image: "../../images/A1_099_EN.jpeg",
+            attacks: [
+                {
+                    name: "Tackle",
+                    score: 20,
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 100,
+            name: "Electrode",
+            image: "../../images/A1_100_EN.jpeg",
+            attacks: [
+                {
+                    name: "Electro Ball",
+                    score: 70,
+                    energy: [
+                        { type: "electric", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 2
+        },
+        {
+            number: 101,
+            name: "Electabuzz",
+            image: "../../images/A1_101_EN.jpeg",
+            attacks: [
+                {
+                    name: "Thunder Punch",
+                    score: 40,
+                    effect: {
+                        type: "coinFlip",
+                        description: "If heads, this attack does 40 more damage. If tails, this Pokémon also does 20 damage to itself."
+                    },
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 102,
+            name: "Jolteon",
+            image: "../../images/A1_102_EN.jpeg",
+            attacks: [
+                {
+                    name: "Pin Missile",
+                    score: 40,
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip 4 coins. This attack does 40 damage for each heads."
+                    },
+                    energy: [
+                        { type: "electric", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 3
+        },
+        {
+            number: 103,
+            name: "Zapdos",
+            image: "../../images/A1_103_EN.jpeg",
+            attacks: [
+                {
+                    name: "Raging Thunder",
+                    score: 100,
+                    effect: {
+                        type: "additional_damage",
+                        description: "This attack also does 30 damage to 1 of your Benched Pokémon."
+                    },
+                    energy: [
+                        { type: "electric", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 100,
+            stage: "basic",
+            rarity: 3
+        },
+        {
+            number: 104,
+            name: "Zapdos EX",
+            image: "../../images/A1_104_EN.jpeg",
+            attacks: [
+                {
+                    name: "Peck",
+                    score: 20,
+                    energy: [
+                        { type: "any", amount: 1 }
+                    ]
+                },
+                {
+                    name: "Thundering Hurricane",
+                    score: 50,
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip 4 coins. This attack does 50 damage for each heads."
+                    },
+                    energy: [
+                        { type: "electric", amount: 3 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 130,
+            stage: "basic",
+            rarity: 4
+        },
+        {
+            number: 105,
+            name: "Blitzle",
+            image: "../../images/A1_105_EN.jpeg",
+            attacks: [
+                {
+                    name: "Zap Kick",
+                    score: 20,
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 106,
+            name: "Zebstrika",
+            image: "../../images/A1_106_EN.jpeg",
+            attacks: [
+                {
+                    name: "Thunder Spear",
+                    score: 30,
+                    effect: {
+                        type: "additional_damage",
+                        description: "This attack does 30 damage to 1 of your opponent's Pokémon."
+                    },
+                    energy: [
+                        { type: "electric", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2
+        },
+        {
+            number: 107,
+            name: "Tynamo",
+            image: "../../images/A1_107_EN.jpeg",
+            attacks: [
+                {
+                    name: "Tiny Charge",
+                    score: 30,
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 30,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 108,
+            name: "Eelektrik",
+            image: "../../images/A1_108_EN.jpeg",
+            attacks: [
+                {
+                    name: "Head Bolt",
+                    score: 40,
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 2
+        },
+        {
+            number: 109,
+            name: "Eelektross",
+            image: "../../images/A1_109_EN.jpeg",
+            attacks: [
+                {
+                    name: "Thunder Fang",
+                    score: 80,
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip a coin. If heads, your opponent’s Active Pokémon is now Paralyzed."
+                    },
+                    energy: [
+                        { type: "electric", amount: 2 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 140,
+            stage: "stage 2",
+            rarity: 3
+        },
+        {
+            number: 110,
+            name: "Helioptile",
+            image: "../../images/A1_110_EN.jpeg",
+            attacks: [
+                {
+                    name: "Tail Whap",
+                    score: 20,
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 111,
+            name: "Heliolisk",
+            image: "../../images/A1_111_EN.jpeg",
+            attacks: [
+                {
+                    name: "Quick Attack",
+                    score: 40,
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip a coin. If heads, this attack does 40 more damage."
+                    },
+                    energy: [
+                        { type: "electric", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2
+        },
+        {
+            number: 112,
+            name: "Pincurchin",
+            image: "../../images/A1_112_EN.jpeg",
+            attacks: [
+                {
+                    name: "Thunder Shock",
+                    score: 30,
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip a coin. If heads, your opponent’s Active Pokémon is now Paralyzed."
+                    },
+                    energy: [
+                        { type: "electric", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "fighting",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1
         },
     ]
 
