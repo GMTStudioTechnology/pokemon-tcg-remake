@@ -2,9 +2,18 @@ import { PokemonList, cardposibility } from './PokemonList';
 
 function OpenPack() {
     function getRandomCard(rarity) {
-        // Combine all Pokemon types into a single array
-        const allCards = Object.values(PokemonList).reduce((acc, typeArray) => {
-            return acc.concat(typeArray.filter(card => card && card.rarity === rarity));
+        // Combine all Pokémon types into a single array
+        const allCards = Object.values(PokemonList).reduce((acc, typeCards, index) => {
+            // Get the type name from PokemonList keys
+            const type = Object.keys(PokemonList)[index];
+            return acc.concat(
+                typeCards
+                    .filter(card => card && card.rarity === rarity)
+                    .map(card => ({
+                        ...card,
+                        type: type // Add the type property explicitly
+                    }))
+            );
         }, []);
 
         // Check if we have any cards of this rarity
@@ -21,7 +30,8 @@ function OpenPack() {
         
         return {
             ...selectedCard,
-            image: imagePath
+            image: imagePath,
+            type: selectedCard.type // Ensure type is included
         };
     }
 
@@ -45,17 +55,21 @@ function OpenPack() {
         try {
             const pack = [];
             
+            console.log('=== Creating New Pack ===');
+            
             // First three cards (commons)
             for (let i = 0; i < 3; i++) {
-                pack.push(getCardByProbabilities({
+                const card = getCardByProbabilities({
                     1: cardposibility[1][0],  // 100%
                     2: cardposibility[1][1],  // 0%
                     3: cardposibility[1][2],  // 0%
-                }));
+                });
+                console.log(`Common card ${i + 1}:`, card.name);
+                pack.push(card);
             }
 
             // Fourth card (uncommon/rare slot)
-            pack.push(getCardByProbabilities({
+            const card4 = getCardByProbabilities({
                 1: cardposibility[1][1],  // 0%
                 2: cardposibility[2][1],  // 90%
                 3: cardposibility[3][1],  // 5%
@@ -64,10 +78,12 @@ function OpenPack() {
                 6: cardposibility[6][1],  // 0.5%
                 7: cardposibility[7][1],  // 0.222%
                 8: cardposibility[8][1],  // 0.04%
-            }));
+            });
+            console.log('Uncommon/rare slot card:', card4.name);
+            pack.push(card4);
 
             // Fifth card (rare slot)
-            pack.push(getCardByProbabilities({
+            const card5 = getCardByProbabilities({
                 1: cardposibility[1][2],  // 0%
                 2: cardposibility[2][2],  // 60%
                 3: cardposibility[3][2],  // 20%
@@ -76,9 +92,12 @@ function OpenPack() {
                 6: cardposibility[6][2],  // 2%
                 7: cardposibility[7][2],  // 0.888%
                 8: cardposibility[8][2],  // 0.16%
-            }));
+            });
+            console.log('Rare slot card:', card5.name);
+            pack.push(card5);
 
-            return pack.sort(() => Math.random() - 0.5);
+            console.log('=== Pack Created ===');
+            return pack;  // Remove the .sort() to maintain order for debugging
         } catch (error) {
             console.error('Error opening pack:', error);
             return [];
