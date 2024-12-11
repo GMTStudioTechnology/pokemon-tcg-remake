@@ -3014,7 +3014,7 @@ const PokemonList = {
             ],
             weakness: "darkness", // Set weakness to darkness
             retreatCost: [
-                { type: "any", amount: 1 }
+                { type: "any", amount: 2 }
             ],
             hp: 130,
             stage: "stage 2",
@@ -3040,11 +3040,192 @@ const PokemonList = {
             ],
             weakness: "darkness", // Set weakness to darkness
             retreatCost: [
-                { type: "any", amount: 1 }
+                { type: "any", amount: 2 }
             ],
             hp: 170,
             stage: "stage 2",
             rarity: 4 // Adjust rarity as needed
+        },
+        {
+            number: 124,
+            name: "Drowzee",
+            image: "../../images/A1_124_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Mumble",
+                    score: 30,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 125,
+            name: "Hypno",
+            image: "../../images/A1_125_EN.jpeg", // Update the image path as needed
+            ability: {
+                name: "Sleep Pendulum",
+                description: "Once during your turn, you may flip a coin. If heads, your opponent’s Active Pokémon is now Asleep."
+            },
+            attacks: [
+                {
+                    name: "Psypunch",
+                    score: 50,
+                    energy: [
+                        { type: "psychic", amount: 2 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 100,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 126,
+            name: "Mr. Mime",
+            image: "../../images/A1_126_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Barrier Attack",
+                    score: 30,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ],
+                    effect: {
+                        type: "damage_reduction",
+                        description: "During your opponent’s next turn, this Pokémon takes -20 damage from attacks."
+                    }
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "basic",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 127,
+            name: "Jynx",
+            image: "../../images/A1_127_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Psychic",
+                    score: 30,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ],
+                    effect: {
+                        type: "additional_damage",
+                        description: "This attack does 20 more damage for each Energy attached to your opponent's Active Pokémon."
+                    }
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 128,
+            name: "Mewtwo",
+            image: "../../images/A1_128_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Power Blast",
+                    score: 120,
+                    energy: [
+                        { type: "psychic", amount: 2 },
+                        { type: "any", amount: 2 }
+                    ],
+                    effect: {
+                        type: "discard_energy",
+                        description: "Discard 2 Energy from this Pokémon."
+                    }
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 120,
+            stage: "basic",
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 129,
+            name: "Mewtwo EX",
+            image: "../../images/A1_129_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Psychic Sphere",
+                    score: 50,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ]
+                },
+                {
+                    name: "Psydrive",
+                    score: 150,
+                    energy: [
+                        { type: "psychic", amount: 2 },
+                        { type: "any", amount: 2 }
+                    ],
+                    effect: {
+                        type: "discard_energy",
+                        description: "Discard 2 Energy from this Pokémon."
+                    }
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 150,
+            stage: "basic",
+            rarity: 4 // Adjust rarity as needed
+        },
+        {
+            number: 130,
+            name: "Ralts",
+            image: "../../images/A1_130_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Ram",
+                    score: 10,
+                    energy: [
+                        { type: "psychic", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
         },
     ]
 
