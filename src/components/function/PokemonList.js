@@ -2704,7 +2704,7 @@ const PokemonList = {
                     score: 80,
                     effect: {
                         type: "coinFlip",
-                        description: "Flip a coin. If heads, your opponent’s Active Pokémon is now Paralyzed."
+                        description: "Flip a coin. If heads, your opponent's Active Pokémon is now Paralyzed."
                     },
                     energy: [
                         { type: "electric", amount: 2 },
@@ -2776,7 +2776,7 @@ const PokemonList = {
                     score: 30,
                     effect: {
                         type: "coinFlip",
-                        description: "Flip a coin. If heads, your opponent’s Active Pokémon is now Paralyzed."
+                        description: "Flip a coin. If heads, your opponent's Active Pokémon is now Paralyzed."
                     },
                     energy: [
                         { type: "electric", amount: 1 }
@@ -2790,6 +2790,261 @@ const PokemonList = {
             hp: 70,
             stage: "basic",
             rarity: 1
+        },
+    ],
+    pcychic:[
+        {
+            number: 113,
+            name: "Clefairy",
+            image: "../../images/A1_113_EN.jpeg",
+            attacks: [
+                {
+                    name: "Slap",
+                    score: 20,
+                    energy: [
+                        { type: "psychic", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "metal",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 114,
+            name: "Clefable",
+            image: "../../images/A1_114_EN.jpeg",
+            attacks: [
+                {
+                    name: "Magical Shot",
+                    score: 40,
+                    energy: [
+                        { type: "psychic", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "metal",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 100,
+            stage: "stage 1",
+            rarity: 2
+        },
+        {
+            number: 115,
+            name: "Abra",
+            image: "../../images/A1_113_EN.jpeg",
+            attacks: [
+                {
+                    name: "Teleport",
+                    score: 0,
+                    energy: [
+                        { type: "psychic", amount: 1 }
+                    ],
+                    effect: {
+                        type: "switch",
+                        description: "Switch this Pokémon with 1 of your Benched Pokémon."
+                    }
+                }
+            ],
+            weakness: "darkness",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1
+        },
+        {
+            number: 116,
+            name: "Kadabra",
+            image: "../../images/A1_116_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Super Psy Bolt",
+                    score: 60,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "darkness",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 2 
+        },
+        {
+            number: 117,
+            name: "Alakazam",
+            image: "../../images/A1_117_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Psychic",
+                    score: 60,
+                    energy: [
+                        { type: "psychic", amount: 2 },
+                        { type: "any", amount: 1 }
+                    ],
+                    effect: {
+                        type: "extra_damage",
+                        description: "This attack does 30 more damage for each Energy attached to your opponent's Active Pokémon."
+                    }
+                }
+            ],
+            weakness: "darkness",
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 130,
+            stage: "stage 2",
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 118,
+            name: "Slowpoke",
+            image: "../../images/A1_118_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Tail Whap",
+                    score: 30,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness",
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 119,
+            name: "Slowbro",
+            image: "../../images/A1_119_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Super Psy Bolt",
+                    score: 80,
+                    energy: [
+                        { type: "psychic", amount: 2 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 130,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 120,
+            name: "Gastly",
+            image: "../../images/A1_120_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Suffocating Gas",
+                    score: 20,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 121,
+            name: "Haunter",
+            image: "../../images/A1_121_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Will-O-Wisp",
+                    score: 30,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 122,
+            name: "Gengar",
+            image: "../../images/A1_122_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Bother",
+                    score: 50,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                    ],
+                    effect: {
+                        type: "prevent_supporter",
+                        description: "Your opponent can’t use any Supporter cards from their hand during their next turn."
+                    }
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 130,
+            stage: "stage 2",
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 123,
+            name: "Gengar EX",
+            image: "../../images/A1_123_EN.jpeg", // Update the image path as needed
+            ability: {
+                name: "Shadowy Spellbind",
+                description: "As long as this Pokémon is in the Active Spot, your opponent can’t use any Supporter cards from their hand."
+            },
+            attacks: [
+                {
+                    name: "Spooky Shot",
+                    score: 100,
+                    energy: [
+                        { type: "psychic", amount: 2 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 170,
+            stage: "stage 2",
+            rarity: 4 // Adjust rarity as needed
         },
     ]
 
