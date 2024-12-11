@@ -26,7 +26,6 @@ const PokemonList = {
 
         },
 
-
         {
             number: 2,
             name: "Ivysaur",
@@ -50,8 +49,6 @@ const PokemonList = {
             rarity:2
         },
 
-
-
         {
             number: 3,
             name: "Venusaur",
@@ -74,8 +71,6 @@ const PokemonList = {
             stage: "stage 2",
             rarity:3
         },
-
-
 
         {
             number: 4,
@@ -113,8 +108,6 @@ const PokemonList = {
             rarity:4
         },
 
-
-
         {
             number: 5,
             name: "Caterpie",
@@ -134,8 +127,6 @@ const PokemonList = {
             ],
             rarity:1
         },
-
-
 
         {
             number: 6,
@@ -158,7 +149,6 @@ const PokemonList = {
             stage: "stage 1",
             rarity:1
         },
-
 
         {
             number: 7,
@@ -205,8 +195,6 @@ const PokemonList = {
             rarity:1
         },
 
-
-
         {
             number: 9,
             name: "Kakuna",
@@ -228,7 +216,6 @@ const PokemonList = {
             stage: "stage 1",
             rarity:1
         },
-
 
         {
             number: 10,
@@ -252,8 +239,6 @@ const PokemonList = {
             rarity:3
         },
 
-
-
         {
             number: 11,
             name: "Oddish",
@@ -275,8 +260,6 @@ const PokemonList = {
             stage: "basic",
             rarity:1
         },
-
-
 
         {
             number: 12,
@@ -301,8 +284,6 @@ const PokemonList = {
             rarity:2
         },
 
-
-
         {
             number: 13,
             name: "Vileplume",
@@ -325,7 +306,6 @@ const PokemonList = {
             stage: "stage 2",
             rarity:3
         },
-
 
         {
             number: 14,
@@ -1382,7 +1362,7 @@ const PokemonList = {
                     }
                 }
             ],
-            weakness: "grass",
+            weakness: "psychic",
             retreatCost: [
                 { type: "any", amount: 3 }
             ],
@@ -2792,7 +2772,8 @@ const PokemonList = {
             rarity: 1
         },
     ],
-    pcychic:[
+    /*psychic:*/
+    psychic:[
         {
             number: 113,
             name: "Clefairy",
@@ -3391,9 +3372,318 @@ const PokemonList = {
             stage: "stage 1", // Updated stage
             rarity: 2 // Adjust rarity as needed
         },
-    ]
-
-
+    ],
+    /*fighting*/
+    fighting:[
+        {
+            number: 137,
+            name: "Sandshrew",
+            image: "../../images/A1_137_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Scratch",
+                    score: 10,
+                    energy: [
+                        { type: "fighting", amount: 1 },
+                    ],
+                }
+            ],
+            weakness: "grass", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 70,
+            stage: "basic", // Updated stage
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 138,
+            name: "Sandslash",
+            image: "../../images/A1_138_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Slash",
+                    score: 70,
+                    energy: [
+                        { type: "fighting", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 2}
+            ],
+            hp: 100,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 139,
+            name: "Diglett",
+            image: "../../images/A1_139_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Mud-Slap",
+                    score: 20,
+                    energy: [
+                        { type: "fighting", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 50,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 140,
+            name: "Dugtrio",
+            image: "../../images/A1_140_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Dig",
+                    score: 40,
+                    energy: [
+                        { type: "fighting", amount: 1 }
+                    ],
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip a coin. If heads, during your opponent's next turn, prevent all damage from—and effects of—attacks done to this Pokémon."
+                    }
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 70,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 141,
+            name: "Mankey",
+            image: "../../images/A1_141_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Low Kick",
+                    score: 20,
+                    energy: [
+                        { type: "fighting", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "psychic", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 142,
+            name: "Primeape",
+            image: "../../images/A1_142_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Fight Back",
+                    score: 40,
+                    energy: [
+                        { type: "fighting", amount: 2 }
+                    ],
+                    effect: {
+                        type: "conditional_damage",
+                        description: "If this Pokémon has damage on it, this attack does 60 more damage."
+                    }
+                }
+            ],
+            weakness: "psychic", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 143,
+            name: "Machop",
+            image: "../../images/A1_143_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Knuckle Punch",
+                    score: 20,
+                    energy: [
+                        { type: "fighting", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "psychic", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 144,
+            name: "Machoke",
+            image: "../../images/A1_144_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Strength",
+                    score: 50,
+                    energy: [
+                        { type: "fighting", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "psychic", // Set weakness as needed
+            retreatCost: [
+                { type: "any ", amount: 2 }
+            ],
+            hp: 100,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 145,
+            name: "Machamp",
+            image: "../../images/A1_145_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Seismic Toss",
+                    score: 100,
+                    energy: [
+                        { type: "fighting", amount: 3 }
+                    ]
+                }
+            ],
+            weakness: "psychic", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 3 }
+            ],
+            hp: 150,
+            stage: "stage 2",
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 146,
+            name: "Machamp EX",
+            image: "../../images/A1_145_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Mega Punch",
+                    score: 120,
+                    energy: [
+                        { type: "fighting", amount: 3 }
+                    ]
+                }
+            ],
+            weakness: "psychic", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 3 }
+            ],
+            hp: 150,
+            stage: "stage 2",
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 147,
+            name: "Geodude",
+            image: "../../images/A1_147_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Tackle",
+                    score: 20,
+                    energy: [
+                        { type: "fighting", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 70,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 148,
+            name: "Graveler",
+            image: "../../images/A1_148_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Rollout",
+                    score: 70,
+                    energy: [
+                        { type: "fighting", amount: 1 },
+                        { type: "any", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 3 }
+            ],
+            hp: 100,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 149,
+            name: "Golem",
+            image: "../../images/A1_149_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Double-Edge",
+                    score: 150,
+                    energy: [
+                        { type: "fighting", amount: 1 }
+                    ],
+                    effect: {
+                        type: "self_damage",
+                        amount: 50,
+                        description: "This Pokémon also does 50 damage to itself."
+                    }
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 160, // Updated HP
+            stage: "stage 2", // Updated stage
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 150,
+            name: "Onix",
+            image: "../../images/A1_150_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Land Crush",
+                    score: 70,
+                    energy: [
+                        { type: "fighting", amount: 3 }
+                    ],
+                }
+            ],
+            weakness: "grass", // Set weakness as needed
+            retreatCost: [
+                { type: "any", amount: 4 }
+            ],
+            hp: 110, // Updated HP
+            stage: "basic", // Updated stage
+            rarity: 1 // Adjust rarity as needed
+        },
+    ],
         
 }
 
