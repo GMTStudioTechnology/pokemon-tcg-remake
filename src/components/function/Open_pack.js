@@ -2,17 +2,26 @@ import { PokemonList, cardposibility } from './PokemonList';
 
 function OpenPack() {
     function getRandomCard(rarity) {
-        const cards = Object.values(PokemonList).flat().filter(card => card.rarity === rarity);
-        const randomIndex = Math.floor(Math.random() * cards.length);
-        const selectedCard = cards[randomIndex];
+        // Combine all Pokemon types into a single array
+        const allCards = Object.values(PokemonList).reduce((acc, typeArray) => {
+            return acc.concat(typeArray.filter(card => card && card.rarity === rarity));
+        }, []);
+
+        // Check if we have any cards of this rarity
+        if (allCards.length === 0) {
+            console.warn(`No cards found with rarity ${rarity}, falling back to rarity 1`);
+            return getRandomCard(1); // Fallback to common cards
+        }
+
+        const randomIndex = Math.floor(Math.random() * allCards.length);
+        const selectedCard = allCards[randomIndex];
         
-        // Import image dynamically from the public folder
-        const imagePath = `/images/${selectedCard.image.split('/').pop()}`; // This will get just the filename
+        // Fix the image path
+        const imagePath = selectedCard.image.replace('../../', '/');
         
-        // Return the full card data, just updating the image path
         return {
-            ...selectedCard,  // Spread all original card properties
-            image: imagePath  // Override just the image path
+            ...selectedCard,
+            image: imagePath
         };
     }
 
@@ -33,43 +42,47 @@ function OpenPack() {
     }
 
     function openNewPack() {
-        const pack = [];
-        
-        // First three cards
-        for (let i = 0; i < 3; i++) {
+        try {
+            const pack = [];
+            
+            // First three cards (commons)
+            for (let i = 0; i < 3; i++) {
+                pack.push(getCardByProbabilities({
+                    1: cardposibility[1][0],  // 100%
+                    2: cardposibility[1][1],  // 0%
+                    3: cardposibility[1][2],  // 0%
+                }));
+            }
+
+            // Fourth card (uncommon/rare slot)
             pack.push(getCardByProbabilities({
-                1: cardposibility[1][0],  // 100%
-                2: cardposibility[1][1],  // 0%
-                3: cardposibility[1][2],  // 0%
+                1: cardposibility[1][1],  // 0%
+                2: cardposibility[2][1],  // 90%
+                3: cardposibility[3][1],  // 5%
+                4: cardposibility[4][1],  // 1.666%
+                5: cardposibility[5][1],  // 2.572%
+                6: cardposibility[6][1],  // 0.5%
+                7: cardposibility[7][1],  // 0.222%
+                8: cardposibility[8][1],  // 0.04%
             }));
+
+            // Fifth card (rare slot)
+            pack.push(getCardByProbabilities({
+                1: cardposibility[1][2],  // 0%
+                2: cardposibility[2][2],  // 60%
+                3: cardposibility[3][2],  // 20%
+                4: cardposibility[4][2],  // 6.664%
+                5: cardposibility[5][2],  // 10.288%
+                6: cardposibility[6][2],  // 2%
+                7: cardposibility[7][2],  // 0.888%
+                8: cardposibility[8][2],  // 0.16%
+            }));
+
+            return pack.sort(() => Math.random() - 0.5);
+        } catch (error) {
+            console.error('Error opening pack:', error);
+            return [];
         }
-
-        // Fourth card
-        pack.push(getCardByProbabilities({
-            1: cardposibility[1][1],  // 0%
-            2: cardposibility[2][1],  // 90%
-            3: cardposibility[3][1],  // 5%
-            4: cardposibility[4][1],  // 1.666%
-            5: cardposibility[5][1],  // 2.572%
-            6: cardposibility[6][1],  // 0.5%
-            7: cardposibility[7][1],  // 0.222%
-            8: cardposibility[8][1],  // 0.04%
-        }));
-
-        // Fifth card
-        pack.push(getCardByProbabilities({
-            1: cardposibility[1][2],  // 0%
-            2: cardposibility[2][2],  // 60%
-            3: cardposibility[3][2],  // 20%
-            4: cardposibility[4][2],  // 6.664%
-            5: cardposibility[5][2],  // 10.288%
-            6: cardposibility[6][2],  // 2%
-            7: cardposibility[7][2],  // 0.888%
-            8: cardposibility[8][2],  // 0.16%
-        }));
-
-        // Shuffle the pack
-        return pack.sort(() => Math.random() - 0.5);
     }
 
     return { openNewPack };

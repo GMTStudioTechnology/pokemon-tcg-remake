@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import OpenPack from '../function/Open_pack';
 import useSound from 'use-sound';
 import pack_open from "../../audio/5.mp3";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 
 const OpenPackUI = () => {
     const [cards, setCards] = useState([]);
@@ -12,20 +12,37 @@ const OpenPackUI = () => {
     const packOpener = OpenPack();
     const [selectedCard, setSelectedCard] = useState(null);
     const [packShake, setPackShake] = useState(false);
+    const [sparkles, setSparkles] = useState(false);
+    const packControls = useAnimation();
+    const [isPackVisible, setIsPackVisible] = useState(true);
     
     const [playPackOpen, { stop: stopPackOpen }] = useSound(pack_open);
 
-    const handlePackHover = () => {
+    const handlePackHover = async () => {
         if (!isAnimating) {
             setPackShake(true);
-            setTimeout(() => setPackShake(false), 800);
+            await packControls.start({
+                scale: [1, 1.05, 1],
+                rotate: [0, -2, 2, -1, 0],
+                transition: { duration: 0.5 }
+            });
+            setPackShake(false);
         }
     };
 
     const handleOpenPack = async () => {
         setIsAnimating(true);
+        setIsPackVisible(false);
         stopPackOpen();
         playPackOpen();
+        
+        // Animate pack opening
+        await packControls.start({
+            scale: [1, 1.1, 0],
+            rotate: [0, 5, -5, 0],
+            y: [0, -50, 50],
+            transition: { duration: 1.5 }
+        });
         
         const newCards = packOpener.openNewPack();
         
@@ -47,7 +64,17 @@ const OpenPackUI = () => {
             setRevealedCards(prev => [...prev, i]);
         }
         
-        setIsAnimating(false);
+        setTimeout(() => {
+            setIsPackVisible(true);
+            setIsAnimating(false);
+        }, 2000);
+
+        // Add sparkle effects for rare cards
+        const hasRareCard = newCards.some(card => card.rarity >= 4);
+        if (hasRareCard) {
+            setSparkles(true);
+            setTimeout(() => setSparkles(false), 3000);
+        }
     };
 
     const handleCardClick = (card) => {
@@ -59,61 +86,92 @@ const OpenPackUI = () => {
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-[#1C1C1E] p-8">
-            <motion.button 
-                onClick={handleOpenPack}
-                onMouseEnter={handlePackHover}
-                disabled={isAnimating}
-                animate={packShake ? {
-                    rotate: [0, -2, 2, -2, 0],
-                    scale: [1, 1.02, 1]
-                } : {}}
-                className={`
-                    px-12 py-4 mb-12
-                    text-xl font-medium text-white
-                    bg-white/10
-                    hover:bg-white/20
-                    rounded-full shadow-lg
-                    transform transition-all duration-300 ease-in-out
-                    ${isAnimating ? 'animate-pulse' : 'hover:scale-102'}
-                    disabled:cursor-not-allowed
-                    backdrop-blur-xl
-                    border border-white/10
-                `}
-            >
-                {isAnimating ? (
-                    <div className="flex items-center space-x-2">
-                        <span className="text-white/90">Opening Pack</span>
-                        <div className="w-5 h-5">
-                            <svg className="animate-spin" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                            </svg>
-                        </div>
-                    </div>
-                ) : 'Open Pack'}
-            </motion.button>
+        <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-[#1C1C1E] to-[#2C2C2E] p-8">
+            <AnimatePresence>
+                {isPackVisible && (
+                    <motion.div 
+                        animate={packControls}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="relative mb-12 z-10"
+                    >
+                        <motion.button 
+                            onClick={handleOpenPack}
+                            onMouseEnter={handlePackHover}
+                            disabled={isAnimating}
+                            className={`
+                                px-16 py-6 
+                                text-2xl font-bold text-white
+                                bg-gradient-to-r from-purple-600/80 to-blue-600/80
+                                hover:from-purple-500/90 hover:to-blue-500/90
+                                rounded-2xl shadow-xl
+                                transform transition-all duration-300
+                                ${isAnimating ? 'animate-pulse' : 'hover:scale-105'}
+                                disabled:cursor-not-allowed
+                                backdrop-blur-xl
+                                border border-white/20
+                                relative overflow-hidden
+                            `}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine" />
+                            
+                            {isAnimating ? (
+                                <div className="flex items-center space-x-3">
+                                    <span>Opening Pack</span>
+                                    <div className="w-6 h-6">
+                                        <svg className="animate-spin" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            ) : 'Open Pack'}
+                        </motion.button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <AnimatePresence>
-                {isOpen && (
+                {cards.length > 0 && (
                     <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="w-full max-w-8xl px-4"
                     >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        {sparkles && (
+                            <div className="absolute inset-0 pointer-events-none">
+                                <div className="sparkles" />
+                            </div>
+                        )}
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                             {cards.map((card, index) => (
-                                <div 
-                                    key={index} 
+                                <motion.div 
+                                    key={index}
+                                    initial={{ opacity: 0, rotateY: 180, scale: 0.8 }}
+                                    animate={revealedCards.includes(index) ? {
+                                        opacity: 1,
+                                        rotateY: 0,
+                                        scale: 1,
+                                        transition: {
+                                            duration: 0.8,
+                                            type: "spring",
+                                            stiffness: 260,
+                                            damping: 20
+                                        }
+                                    } : {}}
+                                    whileHover={{ 
+                                        scale: 1.05,
+                                        transition: { duration: 0.2 }
+                                    }}
                                     onClick={() => handleCardClick(card)}
                                     className={`
                                         card-container cursor-pointer
-                                        ${revealedCards.includes(index) ? 'revealed animate-card-reveal' : 'unrevealed'}
-                                        transform transition-all duration-500 ease-in-out
                                         ${getRarityClass(card?.rarity || 1)}
-                                        hover:scale-103
-                                        group
+                                        hover:shadow-2xl hover:shadow-purple-500/20
+                                        transition-shadow duration-300
                                     `}
                                 >
                                     <div className="relative w-full pt-[140%] perspective-1000">
@@ -144,21 +202,20 @@ const OpenPackUI = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Enhanced Card Modal */}
             <AnimatePresence>
                 {selectedCard && (
                     <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80"
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-lg bg-black/70"
                         onClick={closeModal}
                     >
                         <motion.div 
@@ -169,7 +226,6 @@ const OpenPackUI = () => {
                             onClick={e => e.stopPropagation()}
                         >
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-                                {/* Card Image */}
                                 <div className="relative aspect-[2.5/3.5] rounded-xl overflow-hidden">
                                     <img 
                                         src={selectedCard.image} 
@@ -178,7 +234,6 @@ const OpenPackUI = () => {
                                     />
                                 </div>
 
-                                {/* Card Details */}
                                 <div className="text-white space-y-4">
                                     <div className="flex justify-between items-start">
                                         <h2 className="text-2xl font-bold">{selectedCard.name}</h2>
@@ -198,7 +253,6 @@ const OpenPackUI = () => {
                                         <p className="text-white/80">Rarity: {getRarityText(selectedCard.rarity)}</p>
                                         <p className="text-white/80">Weakness: {selectedCard.weakness}</p>
                                         
-                                        {/* Retreat Cost */}
                                         <div className="flex items-center gap-2">
                                             <span className="text-white/80">Retreat Cost:</span>
                                             {selectedCard.retreatCost.map((cost, index) => (
@@ -208,7 +262,6 @@ const OpenPackUI = () => {
                                             ))}
                                         </div>
 
-                                        {/* Attacks */}
                                         <div className="space-y-3">
                                             <h3 className="text-lg font-semibold">Attacks</h3>
                                             {selectedCard.attacks.map((attack, index) => (
@@ -218,7 +271,6 @@ const OpenPackUI = () => {
                                                         <span>{attack.score} damage</span>
                                                     </div>
                                                     
-                                                    {/* Energy Cost */}
                                                     <div className="flex gap-2 mt-2">
                                                         {attack.energy.map((energy, idx) => (
                                                             <span key={idx} className="px-2 py-1 bg-white/10 rounded">
@@ -227,7 +279,6 @@ const OpenPackUI = () => {
                                                         ))}
                                                     </div>
 
-                                                    {/* Effect */}
                                                     {attack.effect && (
                                                         <p className="mt-2 text-sm text-white/70">
                                                             Effect: {attack.effect.description || 
@@ -238,7 +289,6 @@ const OpenPackUI = () => {
                                             ))}
                                         </div>
 
-                                        {/* Ability (if exists) */}
                                         {selectedCard.ability && (
                                             <div className="bg-white/5 rounded-lg p-4">
                                                 <h3 className="font-semibold">{selectedCard.ability.name}</h3>
