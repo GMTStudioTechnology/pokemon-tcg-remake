@@ -3227,6 +3227,170 @@ const PokemonList = {
             stage: "basic",
             rarity: 1 // Adjust rarity as needed
         },
+        {
+            number: 131,
+            name: "Kirlia",
+            image: "../../images/A1_131_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Smack",
+                    score: 30,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 80,
+            stage: "stage 1",
+            rarity: 2 // Adjust rarity as needed
+        },
+        {
+            number: 132,
+            name: "Gardevoir",
+            image: "../../images/A1_132_EN.jpeg", // Update the image path as needed
+            ability: {
+                name: "Psy Shadow",
+                description: "Once during your turn, you may take a Psychic Energy from your Energy Zone and attach it to the Psychic Pokémon in the Active Spot."
+            },
+            attacks: [
+                {
+                    name: "Psyshot",
+                    score: 60,
+                    energy: [
+                        { type: "psychic", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 2 }
+            ],
+            hp: 110,
+            stage: "stage 2", // Updated stage
+            rarity: 3 // Adjust rarity as needed
+        },
+                {
+            number: 132,
+            name: "Gardevoir",
+            image: "../../images/A1_132_EN.jpeg", // Update the image path as needed
+            ability: {
+                name: "Psy Shadow",
+                description: "Once during your turn, you may take a Psychic Energy from your Energy Zone and attach it to the Psychic Pokémon in the Active Spot."
+            },
+            attacks: [
+                {
+                    name: "Psyshot",
+                    score: 60,
+                    energy: [
+                        { type: "psychic", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 110,
+            stage: "stage 2", // Updated stage
+            rarity: 3 // Adjust rarity as needed
+        },
+        {
+            number: 133,
+            name: "Woobat",
+            image: "../../images/A1_133_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Gnaw",
+                    score: 10,
+                    energy: [
+                        { type: "any", amount: 1 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 60,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 134,
+            name: "Swoobat",
+            image: "../../images/A1_134_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Heart Stamp",
+                    score: 60,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 1 }
+
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 1 }
+            ],
+            hp: 90,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 135,
+            name: "Golett",
+            image: "../../images/A1_135_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Mega Punch",
+                    score: 50,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 2 }
+                    ]
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 3 }
+            ],
+            hp: 90,
+            stage: "basic",
+            rarity: 1 // Adjust rarity as needed
+        },
+        {
+            number: 136,
+            name: "Golurk",
+            image: "../../images/A1_136_EN.jpeg", // Update the image path as needed
+            attacks: [
+                {
+                    name: "Double Lariat",
+                    score: 100,
+                    energy: [
+                        { type: "psychic", amount: 1 },
+                        { type: "any", amount: 2 }
+                    ],
+                    effect: {
+                        type: "coinFlip",
+                        description: "Flip 2 coins. This attack does 100 damage for each heads."
+                    }
+                }
+            ],
+            weakness: "darkness", // Set weakness to darkness
+            retreatCost: [
+                { type: "any", amount: 4 }
+            ],
+            hp: 140,
+            stage: "stage 1", // Updated stage
+            rarity: 2 // Adjust rarity as needed
+        },
     ]
 
 
